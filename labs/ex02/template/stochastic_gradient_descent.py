@@ -18,21 +18,21 @@ def compute_stoch_gradient(y, tx, w):
     Returns:
         An array of shape (2, ) (same shape as w), containing the stochastic gradient of the loss at w.
     """
+    N = y.shape[0]
+    e = y - tx.dot(w)
 
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # TODO: implement stochastic gradient computation. It's the same as the usual gradient.
-    # ***************************************************
-    raise NotImplementedError
+    grad = -1/N * tx.T.dot(e)
+
+    return grad
 
 
 def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
     """The Stochastic Gradient Descent algorithm (SGD).
 
     Args:
-        y: shape=(N, )
-        tx: shape=(N,2)
-        initial_w: shape=(2, ). The initial guess (or the initialization) for the model parameters
+        y: numpy array of shape=(N, )
+        tx: numpy array of shape=(N,2)
+        initial_w: numpy array of shape=(2, ). The initial guess (or the initialization) for the model parameters
         batch_size: a scalar denoting the number of data points in a mini-batch used for computing the stochastic gradient
         max_iters: a scalar denoting the total number of iterations of SGD
         gamma: a scalar denoting the stepsize
@@ -47,12 +47,17 @@ def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
     losses = []
     w = initial_w
 
+    batch = batch_iter(y, tx, batch_size, num_batches=max_iters)
     for n_iter in range(max_iters):
-        # ***************************************************
-        # INSERT YOUR CODE HERE
-        # TODO: implement stochastic gradient descent.
-        # ***************************************************
-        raise NotImplementedError
+        minibatch_y, minibatch_tx = next(batch)
+        grad = compute_stoch_gradient(minibatch_y, minibatch_tx, w)
+        loss = compute_loss(y, tx, w)
+
+        w = w - gamma * grad
+        
+        # store w and loss
+        ws.append(w)
+        losses.append(loss)
 
         print(
             "SGD iter. {bi}/{ti}: loss={l}, w0={w0}, w1={w1}".format(
