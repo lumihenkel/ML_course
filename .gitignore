@@ -106,3 +106,9 @@ ENV/
 *.cb2
 *.fdb_latexmk
 *.synctex.gz
+
+
+# Data
+labs/ex08/solution/data
+labs/ex08/template/data
+labs/ex07/template/data
