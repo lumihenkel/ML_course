@@ -108,7 +108,7 @@ ENV/
 *.synctex.gz
 
 
-# Data
+# Data files
 labs/ex08/solution/data
 labs/ex08/template/data
 labs/ex07/template/data
