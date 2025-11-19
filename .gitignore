@@ -109,6 +109,7 @@ ENV/
 
 
 # Data files
+labs/ex09/data
 labs/ex08/solution/data
 labs/ex08/template/data
 labs/ex07/template/data
